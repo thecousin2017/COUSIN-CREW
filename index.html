@@ -32,6 +32,25 @@
             letter-spacing: 2px;
         }
         
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        
+        .dark-blue-bg {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background-color: #003366;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 8px 16px rgba(0, 51, 102, 0.4);
+            z-index: 1;
+        }
+        
         .logo-c {
             font-size: 8em;
             color: #FFD700;
@@ -39,6 +58,8 @@
                          6px 6px 0px rgba(0, 102, 204, 0.3);
             margin: 20px 0;
             font-weight: bold;
+            position: relative;
+            z-index: 2;
         }
         
         .blue-circle {
@@ -50,6 +71,8 @@
             margin-left: 20px;
             vertical-align: middle;
             box-shadow: 0 4px 8px rgba(0, 102, 204, 0.4);
+            position: relative;
+            z-index: 2;
         }
         
         nav {
@@ -136,9 +159,12 @@
     <header>
         <h1>COUSIN CREW</h1>
         <p style="font-size: 1.3em; color: white; margin-bottom: 10px;">Clothing & Squishies</p>
-        <div class="logo-c">
-            C
-            <span class="blue-circle"></span>
+        <div class="logo-container">
+            <div class="dark-blue-bg"></div>
+            <div class="logo-c">
+                C
+                <span class="blue-circle"></span>
+            </div>
         </div>
     </header>
     
@@ -168,8 +194,7 @@
                 </div>
                 <div class="product-card">
                     <h3>✨ More Squishies</h3>
-                    <p>Expanding our collection with new characters and designs. Check back soon for more!
-</p>
+                    <p>Expanding our collection with new characters and designs. Check back soon for more!</p>
                 </div>
             </div>
         </section>
