@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COUSIN CREW - Clothing & Squishies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 3em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            width: 300px;
+            height: 300px;
+            margin: 20px 0;
+        }
+        
+        .dark-blue-bg {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background-color: #003366;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 8px 16px rgba(0, 51, 102, 0.4);
+            z-index: 1;
+        }
+        
+        .logo-c {
+            position: absolute;
+            font-size: 8em;
+            color: #FFD700;
+            text-shadow: 3px 3px 0px #0066CC, 
+                         6px 6px 0px rgba(0, 102, 204, 0.3);
+            font-weight: bold;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            margin: 0;
+            white-space: nowrap;
+        }
+        
+        .blue-circle {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #0066CC;
+            border-radius: 50%;
+            margin-left: 10px;
+            vertical-align: middle;
+            box-shadow: 0 4px 8px rgba(0, 102, 204, 0.4);
+        }
+        
+        nav {
+            background-color: #0066CC;
+            padding: 15px 0;
+            text-align: center;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: #0052A3;
+            border-radius: 5px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .section {
+            background: white;
+            padding: 40px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #0066CC;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .product-card {
+            background: #f9f9f9;
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 102, 204, 0.2);
+        }
+        
+        .product-card h3 {
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>COUSIN CREW</h1>
+        <p style="font-size: 1.3em; color: white; margin-bottom: 10px;">Clothing & Squishies</p>
+        <div class="logo-container">
+            <div class="dark-blue-bg"></div>
+            <div class="logo-c">
+                C<span class="blue-circle"></span>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    
+    <div class="container">
+        <section id="home" class="section">
+            <h2>Welcome to COUSIN CREW</h2>
+            <p>We create quality clothing and adorable squishies that bring joy to our community. From cozy apparel to collectible plushies, COUSIN CREW has something for everyone!</p>
+        </section>
+        
+        <section id="products" class="section">
+            <h2>Our Products</h2>
+            <div class="products">
+                <div class="product-card">
+                    <h3>👕 Clothing</h3>
+                    <p>Stylish and comfortable apparel designed for everyone. Coming soon with exclusive COUSIN CREW designs!</p>
+                </div>
+                <div class="product-card">
+                    <h3>🍪 Cousin Cookie</h3>
+                    <p>Our signature collectible squishie! Soft, huggable, and absolutely adorable. Your new best friend awaits!</p>
+                </div>
+                <div class="product-card">
+                    <h3>✨ More Squishies</h3>
+                    <p>Expanding our collection with new characters and designs. Check back soon for more!</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="about" class="section">
+            <h2>About COUSIN CREW</h2>
+            <p>COUSIN CREW is a brand dedicated to creating quality products that bring happiness and comfort. We believe in the power of community and creating items that people love.</p>
+        </section>
+        
+        <section id="contact" class="section">
+            <h2>Contact Us</h2>
+            <p>Have questions about our products? We'd love to hear from you!</p>
+            <p>Email: <strong>info@cousincrew.com</strong></p>
+            <p>Follow us on social media for updates and exclusive releases!</p>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2026 COUSIN CREW. All rights reserved.</p>
+        <p>Made with 💛 and 💙</p>
+    </footer>
+</body>
+</html>
