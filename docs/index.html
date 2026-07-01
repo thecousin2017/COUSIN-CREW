@@ -133,6 +133,7 @@
             padding: 20px;
             text-align: center;
             transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
         }
         
         .product-card:hover {
@@ -144,6 +145,62 @@
             color: #FFD700;
             margin-bottom: 10px;
             font-size: 1.5em;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 30px;
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+        
+        .modal h2 {
+            color: #0066CC;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .character-list {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .character-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #333;
+            font-size: 1.1em;
+        }
+        
+        .character-list li:last-child {
+            border-bottom: none;
         }
         
         footer {
@@ -195,6 +252,10 @@
                     <h3>🌟 Seasonal Squishies</h3>
                     <p>Limited edition squishies that celebrate every season! Collect them all and see what's new each season!</p>
                 </div>
+                <div class="product-card" onclick="openModal()">
+                    <h3>🏨 Animal Hotel</h3>
+                    <p>Click to see all the adorable characters in the Animal Hotel collection! 🐾</p>
+                </div>
                 <div class="product-card">
                     <h3>✨ More Squishies</h3>
                     <p>Expanding our collection with new characters and designs. Check back soon for more!</p>
@@ -215,9 +276,60 @@
         </section>
     </div>
     
+    <!-- Animal Hotel Modal -->
+    <div id="animalHotelModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>🏨 Animal Hotel Characters</h2>
+            <ul class="character-list">
+                <li>Matilda</li>
+                <li>Betty</li>
+                <li>Daisy</li>
+                <li>Reenie</li>
+                <li>Jone</li>
+                <li>Mabel</li>
+                <li>Dorathy</li>
+                <li>Millie</li>
+                <li>Mollie</li>
+                <li>Poppy</li>
+                <li>Bobby</li>
+                <li>Ted</li>
+                <li>Albert</li>
+                <li>Benjy & Charlie</li>
+                <li>Birty</li>
+                <li>Woody</li>
+                <li>Jack & Jill</li>
+                <li>Bently</li>
+                <li>Louiy</li>
+                <li>George</li>
+                <li>Monty</li>
+                <li>Sweety</li>
+                <li>Sofi</li>
+                <li>Otis & Ella</li>
+            </ul>
+        </div>
+    </div>
+    
     <footer>
         <p>&copy; 2026 COUSIN CREW. All rights reserved.</p>
         <p>Made with 💛 and 💙</p>
     </footer>
+    
+    <script>
+        function openModal() {
+            document.getElementById("animalHotelModal").style.display = "block";
+        }
+        
+        function closeModal() {
+            document.getElementById("animalHotelModal").style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            var modal = document.getElementById("animalHotelModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
