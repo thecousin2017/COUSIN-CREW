@@ -171,80 +171,198 @@
             overflow-y: auto;
         }
         
-        .mario-modal-content {
-            background: linear-gradient(180deg, #87CEEB 0%, #87CEEB 70%, #228B22 70%, #228B22 100%);
-            border: 8px solid;
-            border-image: linear-gradient(45deg, #FFD700, #FFA500) 1;
-            padding: 30px;
-            max-height: 70vh;
-            overflow-y: auto;
+        /* Mario Hotel Styles */
+        .mario-hotel-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #87CEEB 0%, #87CEEB 50%, #228B22 50%, #228B22 100%);
+            overflow: hidden;
+        }
+        
+        .mario-hotel-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mario-hotel-container {
+            width: 95%;
+            height: 95%;
+            background: #8B4513;
+            border: 8px solid #654321;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+        
+        .hotel-header {
+            background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%);
+            padding: 15px;
+            text-align: center;
+            border-bottom: 4px solid #654321;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .hotel-header h2 {
+            color: #E31937;
+            text-shadow: 2px 2px 0px #FFD700, 3px 3px 0px rgba(0, 0, 0, 0.3);
+            margin: 0;
+            font-size: 2em;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .close-mario {
+            color: #E31937;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .close-mario:hover {
+            transform: scale(1.2);
+        }
+        
+        .hotel-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        .room-doors {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+            gap: 20px;
+        }
+        
+        .door-button {
+            width: 140px;
+            height: 180px;
+            background: linear-gradient(135deg, #A0522D 0%, #8B4513 50%, #654321 100%);
+            border: 4px solid #3D2817;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: inset -4px -4px 0px rgba(0, 0, 0, 0.3);
             position: relative;
         }
         
-        .mario-modal-content::before {
-            content: '';
-            position: absolute;
-            bottom: 15%;
-            left: 0;
-            right: 0;
-            height: 40px;
-            background: repeating-linear-gradient(
-                90deg,
-                #8B4513 0px,
-                #8B4513 30px,
-                #A0522D 30px,
-                #A0522D 60px
-            );
-            z-index: -1;
+        .door-button:hover {
+            transform: scale(1.05);
+            box-shadow: inset -4px -4px 0px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 215, 0, 0.5);
         }
         
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
+        .door-button:active {
+            box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.3);
+            transform: scale(0.98);
+        }
+        
+        .door-knob {
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle at 30% 30%, #FFD700, #FFA500);
+            border-radius: 50%;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .door-label {
+            color: #FFD700;
+            font-weight: bold;
+            text-shadow: 1px 1px 0px #000;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .room-view {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            background: #87CEEB;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .room-view.active {
+            display: flex;
+        }
+        
+        .room-header {
+            background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%);
+            padding: 10px;
+            text-align: center;
+            border: 3px solid #654321;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .room-header h3 {
+            color: #E31937;
+            text-shadow: 2px 2px 0px #FFD700;
+            margin: 0;
+            font-size: 1.5em;
+        }
+        
+        .back-button {
+            background: #FF0000;
+            color: white;
+            border: 3px solid #000;
+            padding: 8px 16px;
             font-weight: bold;
             cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: transform 0.2s;
+            margin-bottom: 10px;
         }
         
-        .close:hover {
-            color: #000;
-        }
-        
-        .mario-modal-content h2 {
-            color: #E31937;
-            text-shadow: 2px 2px 0px #FFD700, 4px 4px 0px rgba(0, 0, 0, 0.3);
-            margin-bottom: 20px;
-            text-align: center;
-            clear: both;
-            font-size: 1.8em;
-            font-weight: bold;
+        .back-button:hover {
+            transform: scale(1.05);
         }
         
         .character-list {
             list-style: none;
-            text-align: left;
             background: white;
             padding: 15px;
-            border: 3px solid #000;
+            border: 4px solid #000;
             border-radius: 5px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
         }
         
         .character-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid #f0f0f0;
-            color: #333;
-            font-size: 1.1em;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            padding: 12px;
+            border: 2px solid #000;
+            border-radius: 3px;
+            color: #000;
+            font-size: 14px;
             font-weight: bold;
-        }
-        
-        .character-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .modal h2 {
-            color: #0066CC;
-            margin-bottom: 20px;
             text-align: center;
+            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
         }
         
         footer {
@@ -296,7 +414,7 @@
                     <h3>🌟 Seasonal Squishies</h3>
                     <p>Limited edition squishies that celebrate every season! Collect them all and see what's new each season!</p>
                 </div>
-                <div class="product-card" onclick="openModal('animalHotelModal')">
+                <div class="product-card" onclick="openMarioHotel()">
                     <h3>🏨 Animal Hotel</h3>
                     <p>Click to see all the adorable characters in the Animal Hotel collection! 🐾</p>
                 </div>
@@ -341,37 +459,92 @@
         </div>
     </div>
     
-    <!-- Animal Hotel Modal with Mario Styling -->
-    <div id="animalHotelModal" class="modal">
-        <div class="mario-modal-content">
-            <span class="close" onclick="closeModal('animalHotelModal')">&times;</span>
-            <h2>🏨 Animal Hotel Characters</h2>
-            <ul class="character-list">
-                <li>Matilda</li>
-                <li>Betty</li>
-                <li>Daisy</li>
-                <li>Reenie</li>
-                <li>Jone</li>
-                <li>Mabel</li>
-                <li>Dorathy</li>
-                <li>Millie</li>
-                <li>Mollie</li>
-                <li>Poppy</li>
-                <li>Bobby</li>
-                <li>Ted</li>
-                <li>Albert</li>
-                <li>Benjy & Charlie</li>
-                <li>Birty</li>
-                <li>Woody</li>
-                <li>Jack & Jill</li>
-                <li>Bently</li>
-                <li>Louiy</li>
-                <li>George</li>
-                <li>Monty</li>
-                <li>Sweety</li>
-                <li>Sofi</li>
-                <li>Otis & Ella</li>
-            </ul>
+    <!-- Mario Hotel Modal -->
+    <div id="marioHotelModal" class="mario-hotel-modal">
+        <div class="mario-hotel-container">
+            <div class="hotel-header">
+                <h2>🏨 ANIMAL HOTEL 🏨</h2>
+                <span class="close-mario" onclick="closeMarioHotel()">&times;</span>
+            </div>
+            
+            <div class="hotel-content">
+                <!-- Main Lobby View (Door Selection) -->
+                <div id="lobbyView" class="room-view active">
+                    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                        <div class="room-doors">
+                            <button class="door-button" onclick="enterRoom('lobby')">
+                                <div class="door-knob"></div>
+                                <div class="door-label">LOBBY</div>
+                            </button>
+                            <button class="door-button" onclick="enterRoom('ballroom')">
+                                <div class="door-knob"></div>
+                                <div class="door-label">BALLROOM</div>
+                            </button>
+                            <button class="door-button" onclick="enterRoom('dining')">
+                                <div class="door-knob"></div>
+                                <div class="door-label">DINING<br>ROOM</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lobby Room -->
+                <div id="lobbyRoom" class="room-view">
+                    <button class="back-button" onclick="backToLobby()">← BACK</button>
+                    <div class="room-header">
+                        <h3>🏨 LOBBY</h3>
+                    </div>
+                    <p style="color: #000; font-weight: bold; margin-bottom: 10px;">Welcome guests!</p>
+                    <ul class="character-list">
+                        <li>Matilda</li>
+                        <li>Betty</li>
+                        <li>Daisy</li>
+                        <li>Reenie</li>
+                        <li>Jone</li>
+                        <li>Mabel</li>
+                        <li>Dorathy</li>
+                        <li>Millie</li>
+                    </ul>
+                </div>
+                
+                <!-- Ballroom Room -->
+                <div id="ballroomRoom" class="room-view">
+                    <button class="back-button" onclick="backToLobby()">← BACK</button>
+                    <div class="room-header">
+                        <h3>🎉 BALLROOM</h3>
+                    </div>
+                    <p style="color: #000; font-weight: bold; margin-bottom: 10px;">Dancing and celebrating!</p>
+                    <ul class="character-list">
+                        <li>Mollie</li>
+                        <li>Poppy</li>
+                        <li>Bobby</li>
+                        <li>Ted</li>
+                        <li>Albert</li>
+                        <li>Benjy & Charlie</li>
+                        <li>Birty</li>
+                        <li>Woody</li>
+                    </ul>
+                </div>
+                
+                <!-- Dining Room -->
+                <div id="diningRoom" class="room-view">
+                    <button class="back-button" onclick="backToLobby()">← BACK</button>
+                    <div class="room-header">
+                        <h3>🍽️ DINING ROOM</h3>
+                    </div>
+                    <p style="color: #000; font-weight: bold; margin-bottom: 10px;">Enjoying delicious meals!</p>
+                    <ul class="character-list">
+                        <li>Jack & Jill</li>
+                        <li>Bently</li>
+                        <li>Louiy</li>
+                        <li>George</li>
+                        <li>Monty</li>
+                        <li>Sweety</li>
+                        <li>Sofi</li>
+                        <li>Otis & Ella</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -405,7 +578,47 @@
             document.getElementById(modalId).style.display = "none";
         }
         
+        function openMarioHotel() {
+            document.getElementById("marioHotelModal").classList.add("active");
+            backToLobby(); // Reset to lobby view
+        }
+        
+        function closeMarioHotel() {
+            document.getElementById("marioHotelModal").classList.remove("active");
+        }
+        
+        function enterRoom(room) {
+            // Hide all views
+            document.getElementById("lobbyView").classList.remove("active");
+            document.getElementById("lobbyRoom").classList.remove("active");
+            document.getElementById("ballroomRoom").classList.remove("active");
+            document.getElementById("diningRoom").classList.remove("active");
+            
+            // Show selected room
+            if (room === "lobby") {
+                document.getElementById("lobbyRoom").classList.add("active");
+            } else if (room === "ballroom") {
+                document.getElementById("ballroomRoom").classList.add("active");
+            } else if (room === "dining") {
+                document.getElementById("diningRoom").classList.add("active");
+            }
+        }
+        
+        function backToLobby() {
+            // Hide all views
+            document.getElementById("lobbyView").classList.remove("active");
+            document.getElementById("lobbyRoom").classList.remove("active");
+            document.getElementById("ballroomRoom").classList.remove("active");
+            document.getElementById("diningRoom").classList.remove("active");
+            
+            // Show lobby door selection
+            document.getElementById("lobbyView").classList.add("active");
+        }
+        
         window.onclick = function(event) {
+            if (event.target.id === "marioHotelModal") {
+                closeMarioHotel();
+            }
             if (event.target.classList.contains("modal")) {
                 event.target.style.display = "none";
             }
