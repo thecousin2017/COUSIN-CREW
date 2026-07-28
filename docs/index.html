@@ -150,7 +150,7 @@
         .modal {
             display: none;
             position: fixed;
-            z-index: 1;
+            z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
@@ -167,6 +167,8 @@
             width: 80%;
             max-width: 500px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-height: 70vh;
+            overflow-y: auto;
         }
         
         .close {
@@ -185,6 +187,7 @@
             color: #0066CC;
             margin-bottom: 20px;
             text-align: center;
+            clear: both;
         }
         
         .character-list {
@@ -244,19 +247,19 @@
         <section id="products" class="section">
             <h2>Our Products</h2>
             <div class="products">
-                <div class="product-card">
+                <div class="product-card" onclick="openModal('clothingModal')">
                     <h3>👕 Clothing</h3>
                     <p>Stylish and comfortable apparel designed for everyone. Coming soon with exclusive COUSIN CREW designs!</p>
                 </div>
-                <div class="product-card">
+                <div class="product-card" onclick="openModal('seasonalModal')">
                     <h3>🌟 Seasonal Squishies</h3>
                     <p>Limited edition squishies that celebrate every season! Collect them all and see what's new each season!</p>
                 </div>
-                <div class="product-card" onclick="openModal()">
+                <div class="product-card" onclick="openModal('animalHotelModal')">
                     <h3>🏨 Animal Hotel</h3>
                     <p>Click to see all the adorable characters in the Animal Hotel collection! 🐾</p>
                 </div>
-                <div class="product-card">
+                <div class="product-card" onclick="openModal('moreSquishiesModal')">
                     <h3>✨ More Squishies</h3>
                     <p>Expanding our collection with new characters and designs. Check back soon for more!</p>
                 </div>
@@ -276,10 +279,31 @@
         </section>
     </div>
     
+    <!-- Clothing Modal -->
+    <div id="clothingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('clothingModal')">&times;</span>
+            <h2>👕 Clothing Collection</h2>
+            <p>Welcome to our exclusive clothing collection! We offer stylish and comfortable apparel designed for everyone.</p>
+            <p><strong>Coming Soon:</strong> Exclusive COUSIN CREW designs that you won't find anywhere else!</p>
+        </div>
+    </div>
+    
+    <!-- Seasonal Squishies Modal -->
+    <div id="seasonalModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('seasonalModal')">&times;</span>
+            <h2>🌟 Seasonal Squishies</h2>
+            <p>Limited edition squishies that celebrate every season!</p>
+            <p>Collect them all and watch your collection grow with new designs each season!</p>
+            <p><strong>Current Season:</strong> Coming Soon! Check back for updates!</p>
+        </div>
+    </div>
+    
     <!-- Animal Hotel Modal -->
     <div id="animalHotelModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close" onclick="closeModal('animalHotelModal')">&times;</span>
             <h2>🏨 Animal Hotel Characters</h2>
             <ul class="character-list">
                 <li>Matilda</li>
@@ -310,24 +334,39 @@
         </div>
     </div>
     
+    <!-- More Squishies Modal -->
+    <div id="moreSquishiesModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('moreSquishiesModal')">&times;</span>
+            <h2>✨ More Squishies</h2>
+            <p>We're constantly expanding our collection with new and adorable squishy characters!</p>
+            <p>Check back soon for:</p>
+            <ul style="list-style: none; padding-left: 0;">
+                <li>✓ New character designs</li>
+                <li>✓ Limited edition releases</li>
+                <li>✓ Exclusive collections</li>
+                <li>✓ Fan-favorite rereleases</li>
+            </ul>
+        </div>
+    </div>
+    
     <footer>
         <p>&copy; 2026 COUSIN CREW. All rights reserved.</p>
         <p>Made with 💛 and 💙</p>
     </footer>
     
     <script>
-        function openModal() {
-            document.getElementById("animalHotelModal").style.display = "block";
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
         }
         
-        function closeModal() {
-            document.getElementById("animalHotelModal").style.display = "none";
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
         }
         
         window.onclick = function(event) {
-            var modal = document.getElementById("animalHotelModal");
-            if (event.target == modal) {
-                modal.style.display = "none";
+            if (event.target.classList.contains("modal")) {
+                event.target.style.display = "none";
             }
         }
     </script>
