@@ -218,7 +218,6 @@
             width: 100%;
             height: 100%;
             background: #1a1a2e;
-            overflow: hidden;
         }
         
         .seasonal-modal.active {
@@ -226,13 +225,16 @@
         }
         
         #fireworksCanvas {
-            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 5;
             width: 100%;
             height: 100%;
         }
         
         .seasonal-content {
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -255,7 +257,7 @@
         }
         
         .close-seasonal {
-            position: absolute;
+            position: fixed;
             top: 20px;
             right: 20px;
             color: white;
@@ -728,6 +730,8 @@
             if (!canvas) return;
             
             const ctx = canvas.getContext('2d');
+            
+            // Clear canvas with transparent background
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             // Remove dead particles
@@ -754,13 +758,13 @@
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
                 
-                // Create fireworks at random positions
-                for (let i = 0; i < 5; i++) {
+                // Create fireworks at random positions continuously
+                for (let i = 0; i < 8; i++) {
                     setTimeout(() => {
                         const x = Math.random() * window.innerWidth;
                         const y = Math.random() * (window.innerHeight * 0.6);
                         createFireworks(x, y);
-                    }, i * 300);
+                    }, i * 200);
                 }
                 
                 animateFireworks();
@@ -780,7 +784,7 @@
             const modal = document.getElementById("seasonalModal");
             modal.classList.add("active");
             particles.length = 0; // Clear particles
-            startFireworks();
+            setTimeout(() => startFireworks(), 50);
         }
         
         function closeSeasonalModal() {
@@ -844,7 +848,7 @@
         // Handle window resize for canvas
         window.addEventListener('resize', () => {
             const canvas = document.getElementById('fireworksCanvas');
-            if (canvas) {
+            if (canvas && document.getElementById("seasonalModal").classList.contains("active")) {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
             }
