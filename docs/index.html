@@ -208,6 +208,76 @@
             color: white;
         }
         
+        /* Firework Seasonal Modal */
+        .seasonal-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a2e;
+            overflow: hidden;
+        }
+        
+        .seasonal-modal.active {
+            display: block;
+        }
+        
+        #fireworksCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .seasonal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            max-height: 70vh;
+            overflow-y: auto;
+            border: 3px solid #FFD700;
+        }
+        
+        .seasonal-content h2 {
+            color: #FF1493;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        
+        .close-seasonal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.7);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            z-index: 20;
+        }
+        
+        .close-seasonal:hover {
+            transform: scale(1.2);
+            background: rgba(0, 0, 0, 0.9);
+        }
+        
         /* Mario Hotel Styles */
         .mario-hotel-modal {
             display: none;
@@ -447,7 +517,7 @@
                     <h3>👕 Clothing</h3>
                     <p>Stylish and comfortable apparel designed for everyone. Coming soon with exclusive COUSIN CREW designs!</p>
                 </div>
-                <div class="product-card" onclick="openModal('seasonalModal')">
+                <div class="product-card" onclick="openSeasonalModal()">
                     <h3>🌟 Seasonal Squishies</h3>
                     <p>Limited edition squishies that celebrate every season! Collect them all and see what's new each season!</p>
                 </div>
@@ -490,11 +560,12 @@
         </div>
     </div>
     
-    <!-- Seasonal Squishies Modal -->
-    <div id="seasonalModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('seasonalModal')">&times;</span>
-            <h2>🌟 Seasonal Squishies</h2>
+    <!-- Seasonal Squishies Modal with Fireworks -->
+    <div id="seasonalModal" class="seasonal-modal">
+        <canvas id="fireworksCanvas"></canvas>
+        <span class="close-seasonal" onclick="closeSeasonalModal()">&times;</span>
+        <div class="seasonal-content">
+            <h2>🌟 Seasonal Squishies 🌟</h2>
             <p>Limited edition squishies that celebrate every season!</p>
             <p>Collect them all and watch your collection grow with new designs each season!</p>
             <p><strong>Current Season:</strong> Coming Soon! Check back for updates!</p>
@@ -612,12 +683,113 @@
     </footer>
     
     <script>
+        // Fireworks System
+        let fireworksAnimationId;
+        const particles = [];
+        const colors = ['#FFD700', '#0066CC', '#FF1493', '#00FF00', '#FF6347', '#1E90FF'];
+        
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 8;
+                this.vy = (Math.random() - 0.5) * 8;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.015 + 0.015;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.size = Math.random() * 3 + 2;
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += 0.1; // gravity
+                this.alpha -= this.decay;
+            }
+            
+            draw(ctx) {
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+        }
+        
+        function createFireworks(x, y) {
+            for (let i = 0; i < 50; i++) {
+                particles.push(new Particle(x, y));
+            }
+        }
+        
+        function animateFireworks() {
+            const canvas = document.getElementById('fireworksCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Remove dead particles
+            for (let i = particles.length - 1; i >= 0; i--) {
+                if (particles[i].alpha <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+            
+            // Update and draw particles
+            particles.forEach(p => {
+                p.update();
+                p.draw(ctx);
+            });
+            
+            if (particles.length > 0) {
+                fireworksAnimationId = requestAnimationFrame(animateFireworks);
+            }
+        }
+        
+        function startFireworks() {
+            const canvas = document.getElementById('fireworksCanvas');
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                
+                // Create fireworks at random positions
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const x = Math.random() * window.innerWidth;
+                        const y = Math.random() * (window.innerHeight * 0.6);
+                        createFireworks(x, y);
+                    }, i * 300);
+                }
+                
+                animateFireworks();
+            }
+        }
+        
+        // Modal functions
         function openModal(modalId) {
             document.getElementById(modalId).style.display = "block";
         }
         
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = "none";
+        }
+        
+        function openSeasonalModal() {
+            const modal = document.getElementById("seasonalModal");
+            modal.classList.add("active");
+            particles.length = 0; // Clear particles
+            startFireworks();
+        }
+        
+        function closeSeasonalModal() {
+            const modal = document.getElementById("seasonalModal");
+            modal.classList.remove("active");
+            if (fireworksAnimationId) {
+                cancelAnimationFrame(fireworksAnimationId);
+            }
+            particles.length = 0;
         }
         
         function openMarioHotel() {
@@ -661,10 +833,22 @@
             if (event.target.id === "marioHotelModal") {
                 closeMarioHotel();
             }
+            if (event.target.id === "seasonalModal") {
+                closeSeasonalModal();
+            }
             if (event.target.classList.contains("modal")) {
                 event.target.style.display = "none";
             }
         }
+        
+        // Handle window resize for canvas
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('fireworksCanvas');
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        });
     </script>
 </body>
 </html>
